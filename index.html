@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet"/>
+    
+    <title>Avalição</title>
+</head>
+<body>
+    <section class="imgB">
+        <div style="display: block ; margin-left: 500px;">
+            <img src="./img/img1.png" alt="avalição">
+        </div>
+        
+        
+        
+    </section>
+
+    <section id="dvBT" class="meds">
+      
+        <div class="mds">
+          <span ><h5>Sua média de avaliações é:</h5> </span> 
+           <span ><h5 class="info"  id="medAvalia"></h5> </span>
+        </div>
+        <div class="mds">
+           <span ><h5>A média de idade de seus avaliadores é:</h5> </span> 
+           <span ><h5 class="info" id="medIdade">0</h5> </span>
+        </div>
+        <div class="mds">
+          <span ><h5>Seu total de avaliações é:</h5> </span> 
+          <span ><h5 class="info"  id="totalAvalia">0</h5></span>
+       </div>
+    </section>
+    <section id="dvBT1"  class="meds dspNone ">
+      <div class="mds">
+         <span ><h5>Usuários cadastrados:</h5> </span> 
+         <span ><h5 class="info" id="medIdade">0</h5> </span>
+      </div>
+      
+  </section>
+    
+    <section class="dvBT">
+      <div>
+        <button type="button" class="btn btn-primary" id="btn_avaliar" data-toggle="modal" data-target=".modalAdicionar">
+          Avaliar
+        </button>
+        <button type="button" class="btn btn-primary" id="btn_cadastrar" data-toggle="modal" data-target=".modalCadastrar" style="display: none;">
+          Cadastrar
+        </button>
+        <button type="button" id="mudar" class="btn btn-primary" >
+          TB Usuário
+        </button>
+      </div>
+    </section>
+      <!-- Modal -->
+      <div class="modal fade modalAdicionar" id="modalAdicionar" tabindex="-12" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title col-12" id="exampleModalLongTitle">Avalição</h5>
+            </div>
+            <div class="modal-body">
+
+              <form action="" id="formAvaliar">
+
+                  <label>Nome:</label><br>
+                  <input id="nome" class="nome" name="nome" type="text" MAXLENGTH=30 placeholder="Nome completo">
+                  <div id="erroNome"></div>
+                  <label>Idade:</label><br>
+                  <input id="idade" name="idade"  type="number" onkeypress="return somenteNumeros(event)" placeholder="Idade">
+                  <div id="erroIdade"></div>
+                  
+                  <label>Avaliação:</label><br>
+                  <div class="estrelas">
+                  
+                      <a href="javascript:void(0)" onclick="Avaliar(1)">
+                          <img src="img/star1.png" id="s1"></a>
+                          
+                          <a href="javascript:void(0)" onclick="Avaliar(2)">
+                          <img src="img/star1.png" id="s2"></a>
+                          
+                          <a href="javascript:void(0)" onclick="Avaliar(3)">
+                          <img src="img/star1.png" id="s3"></a>
+                          
+                          <a href="javascript:void(0)" onclick="Avaliar(4)">
+                          <img src="img/star1.png" id="s4"></a>
+                          
+                          <a href="javascript:void(0)" onclick="Avaliar(5)">
+                          <img src="img/star1.png" id="s5"></a>
+                          <p name="nota" id="rating" style="display: none;">5</p>
+                  </div>
+          
+                  
+                  
+                  <label>Deixe seu comentário ou sugestão:</label><br>
+                  <textarea id="comentarioCli" maxlength="160" rows="2" cols="60" name="comentario" placeholder="Comentário ou sugestão"></textarea>
+                  <br>
+                </div>
+              </form>
+            <div class="modal-footer">
+              <a href="#" class="btnMe btnMeRed " data-dismiss="modal" >Fechar</a>
+              <a href="#" class="btnMe btnMeGreen " onclick='insertElement();'>Enviar</a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade modalAlterar" id="modalAlterar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title col-12" id="exampleModalLongTitle">Alterar</h5>
+            </div>
+            <div class="modal-body">
+                <label>Nome:</label><br>
+                <input id="nomeAlterar" name="nomeAlterar" class="nome" type="text" MAXLENGTH=30 placeholder="Nome completo">
+                <div id="erroNome"></div>
+                <label>Idade:</label><br>
+                <input id="idadeAlterar" name="idadeAlterar"  type="number" onkeypress="return somenteNumeros(event)" placeholder="Idade">
+                <div id="erroIdade"></div>
+                
+                <input id="idAvalia" name="idAvalia"  type="hidden" value="5" >
+                <label>Avaliação:</label><br>
+                <div class="estrelasAlterar">
+                
+                    <a href="javascript:void(0)" onclick="AvaliarAlterar(1)">
+                        <img src="img/star1.png" id="s1Alterar"></a>
+                        
+                        <a href="javascript:void(0)" onclick="AvaliarAlterar(2)">
+                        <img src="img/star1.png" id="s2Alterar"></a>
+                        
+                        <a href="javascript:void(0)" onclick="AvaliarAlterar(3)">
+                        <img src="img/star1.png" id="s3Alterar"></a>
+                        
+                        <a href="javascript:void(0)" onclick="AvaliarAlterar(4)">
+                        <img src="img/star1.png" id="s4Alterar"></a>
+                        
+                        <a href="javascript:void(0)" onclick="AvaliarAlterar(5)">
+                        <img src="img/star1.png" id="s5Alterar"></a>
+                        <p name="nota" id="ratingAlterar" style="display: none;">5</p>
+                </div>
+        
+                
+                
+                <label>Deixe seu comentário ou sugestão:</label><br>
+                <textarea id="comentarioCliAlterar" maxlength="160" rows="2" cols="60" name="comentario" placeholder="Comentário ou sugestão"></textarea>
+                <br>
+              
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btnMe btnMeRed " data-dismiss="modal" >Fechar</a>
+              <a href="#" class="btnMe btnMeGreen click " onclick="alteraElement(this.id)">Enviar</a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Button trigger modal -->
+
+    <div id="avaliacoesEfect" class="avalicoes">
+
+      <h4>Avaliações</h4>
+            <table id="avaliacoesT" class="table align-middle table-striped" border="1" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th class="thNome">Nome</th>
+                    <th class="thIdade th0px">Idade</th>
+                    <th class="thIdade th0px">Avaliação</th>
+                    <th class="thComentario">Comentário</th>
+                    <th class="thData th0px">Data</th>
+                    <th class="thAcao">Ação</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="avaliacoes"></tbody>
+            
+        </table>
+    </div>
+    <div id="usuarioEfect"  class="usuarios dspNone ">
+      <table id="usersT" class="table align-middle table-striped" border="1" style="width: 100%;">
+        <h4>Usuários</h4>
+      <thead>
+          <tr>
+              <th class="thNome">Nome</th>
+              <th class="thIdade">E-mail</th>
+              <th class="thTipo">Tipo</th>
+              <th class="thData th0px">Data</th>
+              <th class="thAcao">Ação</th>
+          </tr>
+
+      </thead>
+
+      <tbody id="users"></tbody>
+      
+  </table>
+</div>
+
+<div class="modal fade modalCadastrar" id="modalCadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title col-12">Cadastrar</h5>
+      </div>
+      <div class="modal-body">
+
+        <form action="" id="formUsuario">
+
+            <label>Nome:</label><br>
+            <input id="nomeUsuario" class="nome" name="nome" type="text" MAXLENGTH=30 placeholder="Nome completo">
+            <div id="erroNome1"></div>
+            <label>E-mail:</label><br>
+            <input id="email" name="email"  type="email"  placeholder="E-mail">
+            <div id="erroEmail"></div>
+            <label>Senha:</label><br>
+            <input id="senha" name="senha"  type="password"  placeholder="Senha">
+            <div id="erroSenha"></div>
+            <label>Tipo de usuário:</label><br>
+
+            <input type="radio" id="admin" name="usuario" value="1">
+            <label for="admin">Administrador</label><br>
+            <input type="radio" id="user" name="usuario" value="0">
+            <label for="user">Usuário</label><br>
+            
+        </form>
+        <div class="modal-footer">
+          <a href="#" class="btnMe btnMeRed " data-dismiss="modal" >Fechar</a>
+          <a href="#" class="btnMe btnMeGreen" onclick='insertElement1();'>Enviar</a>
+
+        </div>
+    </div>
+  </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script language="JavaScript" type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <script src="./js/dao.js"></script>
+    <script src="./js/app.js" async></script>
+    <script language="JavaScript" type="text/javascript" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    
+    <script async>
+        //$(document).ready(function () {
+          $("#avaliacoesT").DataTable({
+        "order": [[0, "asc"]],
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/pt_br.json'
+        },
+        responsive: {
+            details: {
+                type: 'column'
+            }
+        },
+        columnDefs: [{
+            className: 'dtr-control',
+            orderable: false,
+            targets: 0
+        }],
+    });
+        //});
+    </script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </body>
+</html>

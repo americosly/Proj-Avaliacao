@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@font-face {
+  font-family: 'rampartOne';
+  src: url('../fonts/RampartOne.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+body {
+  font-family: 'Courgette', cursive;
+  background-color: #fff6f6 !important;
+}
+
+.erro {
+    color: brown;
+}
+
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+
+.imgB  {
+  margin: 0 auto;
+  background-color: #2c5c9e;
+  margin-bottom: 70px;
+}
+
+.meds {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.meds .mds .info{
+  padding-left: 50%;
+  font-family: 'rampartOne';
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+}
+
+.dvBT {
+  margin-bottom: 85px;
+}
+
+ h4 {
+ text-align: center;
+font-size: 30px;
+margin-left: 455px;
+}
+
+
+.avalicoes {
+  box-shadow: 0 0 8px black;
+  font-family:  'Space Mono';
+  opacity: 1;
+  transition: opacity .8s ease;
+}
+.avalicoes.fade {
+opacity: .1;
+}
+
+.usuarios {
+  box-shadow: 0 0 8px black;
+  font-family:  'Space Mono';
+  opacity: 1;
+  transition: opacity .8s ease;
+}
+
+.usuarios.fade {
+  opacity: .1;
+  }
+
+
+.mds1 {
+  opacity: 1;
+  transition: opacity .8s ease;
+}
+
+.mds1.fade {
+  opacity: .1;
+}
+
+.dspNone {
+  display: none;
+}
+
+.meds {
+  opacity: 1;
+  transition: opacity .8s ease;
+}
+
+.meds.fade {
+  opacity: .1;
+}
+
+.estrelas label i.fa{
+  font-size: 2.5em
+}
+.estrelas label i.fa:before {
+  content:'\f005';
+  color: #FC0;
+}
+.estrelas input[type=radio]:checked ~ label i.fa:before {
+  color: #CCC;
+}
+
+table#avaliacoesT {
+  width: 100%;
+}
+
+.btExcluir {
+  cursor: pointer;
+  background-color: rgb(196, 37, 37);
+  color: #FFF;
+  font-size: 12px;
+  border-radius: 3px;
+  width: 3px;
+  padding: 2px;
+  margin: 2px;
+  margin-left: 5px;
+}
+
+
+.th0px {
+  width: 0px !important;
+}
+
+th.thAcao.sorting {
+  width: 90px !important;
+}
+
+th.thNome.dtr-control.sorting_disabled.sorting_asc {
+  width: 200px !important;
+}
+
+.btAlterar {
+  cursor: pointer;
+  background-color: rgb(37, 196, 37);
+  color: #FFF;
+  font-size: 12px;
+  border: 0px;
+  border-radius: 3px;
+  width: 45px;
+  padding: 2px;
+  margin: 2px;
+  margin-left: 5px;
+}
+
+#comentarioCli {
+  margin-bottom: 10px;
+}
+
+.btnMe {
+  
+  color: #FFF;
+  text-decoration: none;
+  border-radius: 3px;
+  padding: 3px;
+  margin: 3px;
+  margin-top: 5px;
+}
+
+.btnMeGreen {
+  background-color: rgb(18, 105, 17);
+}
+
+.btnMeGreen:hover {
+  background-color: rgb(63, 170, 41);
+  color: #FFF;
+  text-decoration: none;
+}
+
+.btnMeRed {
+  background-color: rgb(136, 28, 28);
+}
+
+.btnMeRed:hover {
+  background-color:rgb(196, 37, 37);
+  color: #FFF;
+  text-decoration: none;
+}
+
+h5#exampleModalLongTitle {
+  padding-left: 190px;
+}
+
+
+button.btn.btn-primary {
+  float: right;
+  margin: 20px;
+}

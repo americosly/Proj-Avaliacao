@@ -1,0 +1,246 @@
+//Faz a inicialização do SGBD
+document.addEventListener("DOMContentLoaded", function () {
+    dati.initialize(function (status) {
+        if (status == false) {
+            alert("Não foi possível se conectar ao BD.");
+        } else {
+            alert("Conectou ao BD.");
+        }
+    });
+
+    //Busca no BD as avaliações salvas
+    dati.selectAll("TB_AVALIACOES",function(avaliacoes){
+
+        $("#avaliacoes").empty();
+        tblAvaliacoes = document.getElementById("avaliacoes");
+
+        //Popula a tabela com os registros do select
+        $.each(avaliacoes, function(c, avaliacao){
+            
+            var linha   = tblAvaliacoes.insertRow(-1);
+
+            var coluna1 = linha.insertCell(0);
+            var coluna2 = linha.insertCell(1);
+            var coluna3 = linha.insertCell(2);
+            var coluna4 = linha.insertCell(3);
+            var coluna5 = linha.insertCell(4);
+            var coluna6 = linha.insertCell(5);
+        
+            coluna1.innerHTML = avaliacao.NOME;
+            coluna2.innerHTML = avaliacao.IDADE;
+            coluna3.innerHTML = avaliacao.NOME;
+            coluna4.innerHTML = avaliacao.COMENTARIO;
+            coluna5.innerHTML = avaliacao.DATA_CADASTRO;
+            coluna6.innerHTML = "<span onclick='deleteElement("+avaliacao.ID+");'><a href='#'  class='btExcluir'>EXCLUIR</a></span>";
+            
+        });
+    });		
+
+}, false);
+
+
+var nomeDeUsuario = document.getElementById("nome");
+
+function nomeNum() {
+    var no = document.getElementById('erroNome');
+    if(this.value.length < 5) {
+        no.classList.add("erro")
+        no.textContent = "Digite um nome valido";
+    } else 
+        no.textContent = ""
+}
+
+nomeDeUsuario.onblur = nomeNum;
+
+var idadeUsuario = document.getElementById("idade");
+
+function idadeNum() {
+    var no1 = document.getElementById('erroIdade');
+
+    if(this.value >= 120 || this.value <= 0 ) {
+        no1.classList.add("erro")
+        no1.textContent = "Digite uma idade válida";
+    } else 
+        no1.textContent = ""
+}
+
+idadeUsuario.onblur = idadeNum;
+
+function somenteNumeros(e) {
+    var charCode = e.charCode ? e.charCode : e.keyCode;
+
+   if (charCode != 8 && charCode != 9) {
+
+       var maxCaractere = 2;
+       var idade = document.getElementById('idade');           
+            
+       if ((charCode < 48 || charCode > 57)||(idade.value.length >= maxCaractere)) 
+          return false;
+    }
+}
+
+function Avaliar(estrela) {
+
+    switch (estrela) {
+        case 5:
+            document.getElementById("s1").src = "img/star1.png";
+            document.getElementById("s2").src = "img/star1.png";
+            document.getElementById("s3").src = "img/star1.png";
+            document.getElementById("s4").src = "img/star1.png";
+            document.getElementById("s5").src = "img/star1.png";
+            break;
+        case 4:
+            document.getElementById("s1").src = "img/star1.png";
+            document.getElementById("s2").src = "img/star1.png";
+            document.getElementById("s3").src = "img/star1.png";
+            document.getElementById("s4").src = "img/star1.png";
+            document.getElementById("s5").src = "img/star0.png";
+            break;
+        case 3:
+            document.getElementById("s1").src = "img/star1.png";
+            document.getElementById("s2").src = "img/star1.png";
+            document.getElementById("s3").src = "img/star1.png";
+            document.getElementById("s4").src = "img/star0.png";
+            document.getElementById("s5").src = "img/star0.png";
+            break;
+        case 2:
+            document.getElementById("s1").src = "img/star1.png";
+            document.getElementById("s2").src = "img/star1.png";
+            document.getElementById("s3").src = "img/star0.png";
+            document.getElementById("s4").src = "img/star0.png";
+            document.getElementById("s5").src = "img/star0.png";
+            break;
+        case 1:
+            document.getElementById("s1").src = "img/star1.png";
+            document.getElementById("s2").src = "img/star0.png";
+            document.getElementById("s3").src = "img/star0.png";
+            document.getElementById("s4").src = "img/star0.png";
+            document.getElementById("s5").src = "img/star0.png";
+            break;
+        default:
+            document.getElementById("s1").src = "img/star0.png";
+            document.getElementById("s2").src = "img/star0.png";
+            document.getElementById("s3").src = "img/star0.png";
+            document.getElementById("s4").src = "img/star0.png";
+            document.getElementById("s5").src = "img/star0.png";
+            break;
+    }
+    document.getElementById('rating').innerHTML = estrela;
+}
+
+
+// document.getElementById("enviarA").addEventListener("click", function(event){
+
+//     event.preventDefault();
+//     var nomeForm = document.getElementById("nome").value;
+//     var idadeForm = document.getElementById("idade").value;
+//     var notaForm = document.querySelector("#rating").textContent;
+//     var ComentarioForm = document.getElementById("comentarioCli").value;
+    
+
+//     registro = {
+//         "NOME": nomeForm,
+//         "IDADE": idadeForm,    
+//         "NOTA": notaForm,
+//         "COMENTARIO": ComentarioForm,
+//         "DATA_CADASTRO": formatDate(new Date())       
+//     };
+
+//     //Faz a inserção do registro no banco de dados
+//     dati.insert("TB_AVALIACOES", registro, function(codigo){
+
+        
+//         //Insere uma linha na tabela somente após o registro ser salvo no BD
+//         tblAvaliacoes = document.getElementById("avaliacoes");
+//         var linha   = tblAvaliacoes.insertRow(-1);
+    
+//         var coluna1 = linha.insertCell(0);
+//         var coluna2 = linha.insertCell(1);
+//         var coluna3 = linha.insertCell(2);
+//         var coluna4 = linha.insertCell(3);
+//         var coluna5 = linha.insertCell(4);
+//         var coluna6 = linha.insertCell(5);
+
+//         coluna1.innerHTML = nomeForm;
+//         coluna2.innerHTML = idadeForm;
+//         coluna3.innerHTML = notaForm;
+//         coluna4.innerHTML = ComentarioForm;
+//         coluna5.innerHTML = formatDate(new Date());
+//         coluna6.innerHTML = "<span><a onclick='deleteElement("+codigo+");' class='btExcluir'>EXCLUIR</a></span>";
+    
+//     });  			
+// });
+
+function insertElement(){
+
+    var nomeForm = document.getElementById("nome").value;
+    var idadeForm = document.getElementById("idade").value;
+    var notaForm = document.querySelector("#rating").textContent;
+    var ComentarioForm = document.getElementById("comentarioCli").value;
+    
+
+    registro = {
+        "NOME": nomeForm,
+        "IDADE": idadeForm,    
+        "NOTA": notaForm,
+        "COMENTARIO": ComentarioForm,
+        "DATA_CADASTRO": formatDate(new Date())       
+    };
+
+    //Faz a inserção do registro no banco de dados
+    dati.insert("TB_AVALIACOES", registro, function(codigo){
+
+        
+        //Insere uma linha na tabela somente após o registro ser salvo no BD
+        tblAvaliacoes = document.getElementById("avaliacoes");
+        var linha   = tblAvaliacoes.insertRow(-1);
+        linha.id = "tr"+codigo+"";
+    
+        var coluna1 = linha.insertCell(0);
+        var coluna2 = linha.insertCell(1);
+        var coluna3 = linha.insertCell(2);
+        var coluna4 = linha.insertCell(3);
+        var coluna5 = linha.insertCell(4);
+        var coluna6 = linha.insertCell(5);
+
+        coluna1.innerHTML = nomeForm;
+        coluna2.innerHTML = idadeForm;
+        coluna3.innerHTML = notaForm;
+        coluna4.innerHTML = ComentarioForm;
+        coluna5.innerHTML = formatDate(new Date());
+        coluna6.innerHTML = "<span onclick='deleteElement("+codigo+");'><a  class='tr"+codigo+"'>EXCLUIR</a></span>";
+    
+    });  		
+}
+
+
+function deleteElement(id_var){
+    var elementoClicado = event.target;
+   
+    if (elementoClicado.classList.contains("btExcluir")) {
+        var celulaA = elementoClicado.parentNode.parentNode.parentNode;
+        celulaA.remove();
+    }
+    //Exclui o registro do BD de acordo com o 'data-id' do elementro clicado
+    dati.delete("TB_AVALIACOES","ID",""+id_var+"",function(status){
+        
+    });	
+    
+    
+};
+
+
+
+
+//FUNÇÕES ÚTEIS
+function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
+  
+  function formatDate(date) {
+    return [
+      padTo2Digits(date.getDate()),
+      padTo2Digits(date.getMonth() + 1),
+      date.getFullYear(),
+    ].join('/');
+  }
